@@ -6,6 +6,6 @@ import os
 class TestInternet(unittest.TestCase):
     def test_something(self):
         path = os.path.exists('./speedtest.csv')
-        assert path.is_file is True
+        assert path is True
 
 unittest.main()
