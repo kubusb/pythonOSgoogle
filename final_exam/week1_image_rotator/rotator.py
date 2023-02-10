@@ -3,5 +3,5 @@
 # Open an image
 # Rotate an image (90 degrees clockwise)
 # Resize an image (128x128)
-# Save an image in a specific format in a separate directory (.jpeg)
+# Save an image in a specific format in a separate directory (/opt/icons/) (.jpeg)
 
