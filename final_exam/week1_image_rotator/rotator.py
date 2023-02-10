@@ -10,7 +10,7 @@ from PIL import Image
 
 files = [f for f in os.listdir("/opt/icons/")]
 for image in files:
-    im = Image.open("img/src/" + image)
+    im = Image.open("/opt/icons/" + image)
     print(image)
     out128 = im.resize((128, 128))
     out90 = out128.rotate(90)
