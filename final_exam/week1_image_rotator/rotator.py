@@ -4,11 +4,15 @@
 # Rotate an image (90 degrees clockwise)
 # Resize an image (128x128)
 # Save an image in a specific format in a separate directory (/opt/icons/) (.jpeg)
-
+import os
+import sys
 from PIL import Image
-im = Image.open("img/src/_test.jpg")
-print(im.format, im.size, im.mode)
-out128 = im.resize((128, 128))
-out90 = out128.rotate(90)
-out90.save("img/dest/_test.jpeg", "JPEG")
-out90.show()
+
+files = [f for f in os.listdir("img/src/")]
+for image in files:
+    im = Image.open("img/src/" + image)
+    print(image)
+    out128 = im.resize((128, 128))
+    out90 = out128.rotate(90)
+    outrgb = out90.convert('RGB')
+    outrgb.save("img/dest/" + image, "JPEG")
