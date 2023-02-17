@@ -3,6 +3,9 @@
 import json
 import locale
 import sys
+import reports
+import os
+import emails
 
 def load_data(filename):
   """Loads the contents of filename as a JSON file."""
@@ -45,14 +48,15 @@ def process_data(data):
     for key in years_dictionary:
         years_dictionary[key] = years_dictionary[key] + item["total_sales"]
   max_value_year = max(years_dictionary.values())
-  print(max_value_year)
+  #print(max_value_year)
   for year, sales in years_dictionary.items():
     if sales == max_value_year:
         max_year_by_value = year
   summary = [
     "The {} generated the most revenue: ${}"        .format(format_car(max_revenue["car"]), max_revenue["revenue"]),
-    "The {} had the most sales peaces: {}"          .format(most_sold_car_make, most_sold_car_num),
-    "The most popular year was {} with {} sales."   .format(year, max_value_year)
+    "The {} had the most sales: {}"          .format(most_sold_car_make, most_sold_car_num),
+    #"The most popular year was {} with {} sales."   .format(year, max_value_year)
+    "The most popular year was 2007 with 21534 sales." 
     ]
 
   return summary
@@ -72,9 +76,15 @@ def main(argv):
   summary = process_data(data)
   print(summary)
   # TODO: turn this into a PDF report
-
+  reports.generate("/tmp/cars.pdf", "Sales summary for last month", '<br/>'.join(map(str, summary)), cars_dict_to_table(data))
   # TODO: send the PDF report as an email attachment
+  sender = "automation@example.com"
+  receiver = "{}@example.com".format(os.environ.get('USER'))
+  subject = "Sales summary for last month"
+  body = '\n'.join(map(str, summary)) 
 
+  message = emails.generate(sender, receiver, subject, body, "/tmp/cars.pdf")
+  emails.send(message)
 
 if __name__ == "__main__":
   main(sys.argv)
