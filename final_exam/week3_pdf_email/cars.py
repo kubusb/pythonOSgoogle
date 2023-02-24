@@ -79,7 +79,7 @@ def main(argv):
   reports.generate("/tmp/cars.pdf", "Sales summary for last month", '<br/>'.join(map(str, summary)), cars_dict_to_table(data))
   # TODO: send the PDF report as an email attachment
   sender = "automation@example.com"
-  receiver = "{}@example.com".format(os.environ.get('USER'))
+  receiver = "username@example.com"
   subject = "Sales summary for last month"
   body = '\n'.join(map(str, summary)) 
 
