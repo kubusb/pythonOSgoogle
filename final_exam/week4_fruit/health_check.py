@@ -2,6 +2,7 @@
 import psutil
 import socket
 import emails
+import os
 
 # Sending e-mails
 sender = "automation@example.com"
