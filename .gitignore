@@ -171,3 +171,7 @@ poetry.toml
 # End of https://www.toptal.com/developers/gitignore/api/python
 **/img/**
 .DS_store
+**/supplier-data/**
+**/download_drive_file.sh
+**/example_upload.py
+**/supplier-data.tar.gz
