@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3
 from datetime import datetime
 import subprocess
 import json
@@ -13,10 +13,10 @@ def write_int_speed_to_csv():
     dt_string = now.strftime("%Y-%m-%d %H:%M")
 
     # Let's measure the internet speed
-    pomiar = subprocess.run(["fast", "-u", "--single-line", "--json"], capture_output=True)
+    pomiar = subprocess.run(["/usr/local/bin/fast", "-u", "--single-line", "--json"], capture_output=True, text=False)
 
     # grab the result and decode it
-    data  = json.loads(pomiar.stdout.decode())
+    data = json.loads(pomiar.stdout.decode())
 
     pomiar_download = data["downloadSpeed"]
     pomiar_upload = data["uploadSpeed"]
@@ -25,7 +25,7 @@ def write_int_speed_to_csv():
     csv_row = [dt_string, pomiar_download, pomiar_upload, pomiar_ping]
 
     # Let's write this data to file
-    csv_file = './speedtest.csv'
+    csv_file = '/home/pi/repositories/pythonOSgoogle/internet_speed/speedtest.csv'
     isFile = os.path.isfile(csv_file)
 
     if isFile:
